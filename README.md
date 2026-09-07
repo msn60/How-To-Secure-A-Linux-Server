@@ -575,7 +575,11 @@ SSH is a door into your server. This is especially true if you are opening ports
     # verify hostname matches IP
     UseDNS yes
 
-    Compression no
+    # OpenSSH only supports delayed (post-authentication) compression since
+    # 6.7, and removed pre-auth compression support entirely in 7.4 (2016),
+    # so the old compression-oracle attack surface this setting guarded
+    # against no longer exists on any currently supported OpenSSH version
+    Compression yes
     
     # TCP keepalive is spoofable (runs outside the encrypted channel)
 	# Use ClientAlive instead (runs inside the encrypted channel)
